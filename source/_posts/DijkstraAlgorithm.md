@@ -1,7 +1,8 @@
 ---
 title: Dijkstra Algorithm 
 date: 2020-07-09 09:30:27
-tags:
+tags: [算法]
+qrcode: false
 ---
 
 # 1 . 题目
