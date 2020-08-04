@@ -10,6 +10,7 @@ keywords: 帅
 author: Tower Li
 language: en
 timezone: ''
+thumbnail: /bosco.png  # Custom page header image.
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
