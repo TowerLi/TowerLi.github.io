@@ -106,3 +106,9 @@ deploy:
   type: git
   repo: https://github.com/TowerLi/TowerLi.github.io.git
   branch: master
+  
+# hexo-admin authentification
+admin:
+  username: bosco
+  password_hash: $2a$10$1VU0qyoMk/5O/RpALM/3o.jsKOogfwV.WUygUPW4eT9dBMusBIt92
+  secret: bosco want a pure love
