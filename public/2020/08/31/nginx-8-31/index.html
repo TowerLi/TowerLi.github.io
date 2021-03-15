@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="这是一个来自深圳的少年，乐观自信、积极向上的后浪的博客">
+  
+  <meta name="author" content="Tower Li">
+  <meta name="keywords" content="帅">
+  
+  <title>Nginx学习 - 韬哥的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"watercoldtoday.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>韬声依旧</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Nginx学习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-31 15:00" pubdate>
+        2020年8月31日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Nginx学习</h1>
+            
+            <div class="markdown-body">
+              <h1 id="WEB高性能的解决方案"><a href="#WEB高性能的解决方案" class="headerlink" title="WEB高性能的解决方案"></a><strong>WEB高性能的解决方案</strong></h1><p>CDN - 高效的磁盘IO处理能力</p>
+<p>七层/四层负载均衡： 高效的网络协议处理能力</p>
+<ul>
+<li>正向代理</li>
+<li>反向代理</li>
+</ul>
+<p>整合Lua语言的负载均衡： 丰富而完善的生态</p>
+<ul>
+<li><p>API网关</p>
+</li>
+<li><p>Waf防火墙</p>
+</li>
+</ul>
+<h1 id="Nginx-worker分流"><a href="#Nginx-worker分流" class="headerlink" title="Nginx-worker分流"></a><strong>Nginx-worker分流</strong></h1><p>​    nginx是多进程，防止某个线程引用错误的地址空间，地址越界导致整个Nginx崩掉。nginx进程重启，更新nginx.conf，配置脚本更新,nginx -s reload，老worker进程在现存的连接结束后，再优雅地切换成新worker进程。</p>
+<h1 id="Nginx-Location-范例"><a href="#Nginx-Location-范例" class="headerlink" title="Nginx-Location 范例"></a><strong>Nginx-Location 范例</strong></h1><p>Location配置块定义具体的uri应该如何想要</p>
+<ul>
+<li>= 精确匹配 优先级1</li>
+<li>^~ 非正则匹配 优先级2</li>
+<li>~ 区分大小写的正则匹配  优先级3</li>
+<li><strong>~* 不区分大小写的正则匹配 优先级3</strong></li>
+<li>/ 通用匹配 优先级4</li>
+</ul>
+<p>“/“ ——&gt;  location = / {[ configuration A]}</p>
+<p>“index.html”  ——&gt;  location  / {[ configuration B]}</p>
+<p>“/documents/document.html” ——&gt;  location  /documents/  {[ configuration C]}</p>
+<p>“/images/1.gif”   ——&gt;  location ^~ /images/  {[ configuration D]}</p>
+<p>“/documents/1.jpg” ——&gt;  location ~*  .(gif|jpg|png)$   {[ configuration E]}</p>
+<p>优先级越低的应该写在最前面</p>
+<h1 id="Nginx-upstream负载策略"><a href="#Nginx-upstream负载策略" class="headerlink" title="Nginx-upstream负载策略"></a><strong>Nginx-upstream负载策略</strong></h1><p>Syntax: server 轮询| weight | ip_hash | least_conn</p>
+<ul>
+<li>轮询：默认的负载均衡策略，每个请求按照时间顺序逐一分配到不通的后端服务器</li>
+<li>weight： 权重方式，在轮询的策略基础上制定轮询的几率</li>
+<li>ip_hash: 基于客户端IP的分配方式，确保相同的客户端请求一直发到相同的服务器，保证session会话</li>
+<li>least_conn: 把请求转发给连接数较少的后端服务器</li>
+</ul>
+<h1 id="Nginx-健康检查"><a href="#Nginx-健康检查" class="headerlink" title="Nginx-健康检查"></a><strong>Nginx-健康检查</strong></h1><p>​    Nginx默认使用<strong>被动健康检查</strong></p>
+<p>​    fail_timeout时间内出现max_fails次错误</p>
+<p>​    server就被标记为不可用，并惩罚fail_timeout时间不分发请求过来；</p>
+<p>​    即： 30s内出现10次错误server即不可用，30s后重新探测一次</p>
+<p><strong>注： 全部upstream server挂掉后，立刻一次性恢复</strong></p>
+<p>​    connect refuse 和 timeout 永久性错误，proxy_next_upstream选择性定义错误</p>
+<p>​    timeout 控制指令  ：</p>
+<ol>
+<li>​    proxy_connect_timeout： 建链_三次握手时间</li>
+<li>​    proxy_read_timeout ：     建链成功_等待后端服务器响应时间_后端服务器处理请求的时间</li>
+<li>proxy_send_timeout ： 数据回传间隔时间_网络卡时相邻两次数据传输间隔时间</li>
+</ol>
+<h1 id="Nginx-动态缓存"><a href="#Nginx-动态缓存" class="headerlink" title="Nginx-动态缓存"></a><strong>Nginx-动态缓存</strong></h1><p>proxy_cache    tmp-test;                                            缓存的目录</p>
+<p>proxy_cache_valid    200 206 304 301 302 1d;    返回制定状态码的内容被缓存，缓存时间1天</p>
+<p>proxy_cache_key    $uri;</p>
+<p>location ~ /purge(/.*) {                   —–将/purge/$1 对应的 </p>
+<p>​                                                                /tmp-test/$1 缓存文件清理</p>
+<p>​        allow all;</p>
+<p>​        proxy_cache_purge temp-test $1;</p>
+<p>​        header_filter-by_lua ‘ngx.header[“Server”] = “xxxx”‘</p>
+<p>}</p>
+<h1 id="Nginx-会话保持"><a href="#Nginx-会话保持" class="headerlink" title="Nginx-会话保持"></a><strong>Nginx-会话保持</strong></h1><p>Syntax ： sticky [name=rotes] [domain=.foo.bar] [path=/]</p>
+<p>​                            [expires=1h] [hash=index|md5|sha1] [no_fallback]</p>
+<p>​                            [secure] [httponly]</p>
+<ul>
+<li><p>name 记录会话的cookie名称；</p>
+</li>
+<li><p>domain 设置cookie作用的域名；</p>
+</li>
+<li><p>path 设置cookie作用的url路径，默认根目录；</p>
+</li>
+<li><p>expires 设置cookie生存周期，默认不设置，浏览器关闭失效</p>
+</li>
+<li><p>hash 设置cookie中服务器的表示使用明文还是MD5值，默认MD5；</p>
+</li>
+<li><p>no_fallback 设置该选项, 当sticky的后端机器挂了以后，nginx返回502，而不<br>转发到其他服务器，不建议设置</p>
+</li>
+<li><p>secure 设置启用安全的cookie，需要https的支持</p>
+</li>
+<li><p>httponly 允许cookie不通过JS泄露</p>
+</li>
+</ul>
+<h1 id="Nginx-waf"><a href="#Nginx-waf" class="headerlink" title="Nginx-waf"></a><strong>Nginx-waf</strong></h1><p>Web应用程序防火墙（WAF），GAP-Nginx通过第三方扩展模块方式集成ModSecurity，为应用提供WAF能力，弥补应用防护空缺，ModSecurity主要功能：</p>
+<ul>
+<li><p>防止SQL注入攻击，交叉站点脚本攻击（XSS)等</p>
+</li>
+<li><p>并行文本匹配</p>
+</li>
+<li><p>Lua扩展API为开发者提供一个脚本平台以实现用于保护Web应用的复杂逻辑</p>
+</li>
+<li><p>开启waf功能，Nginx收到的每个HTTP请求都会进过waf本地规则库进行扫描，损失性能与启用的防护规则数量相关。    </p>
+<p> server {</p>
+</li>
+</ul>
+<p>​    listen 8090;</p>
+<p>​    modsecurity on;</p>
+<p>}</p>
+<h1 id="部署方式-主备高可用"><a href="#部署方式-主备高可用" class="headerlink" title="部署方式-主备高可用"></a><strong>部署方式-主备高可用</strong></h1><p>​    HA高可用方案是指采用主从热备的部署方式，一主一从，主服务器宕机，从服务器可以接替主服务器提供服务，从而实现高可用。为了实现主从热备部署，有需要使用keepalive的检测软件。从服务检测主服务的健康状态，在从服务发现主服务故障时，从服务夺取主服务对外提供服务的IP地址（VIP)，从服务对外服务，故障主服务不再收到服务请求，实现流量接入高可用。</p>
+<h1 id="keepalived工作原理"><a href="#keepalived工作原理" class="headerlink" title="keepalived工作原理"></a><strong>keepalived工作原理</strong></h1><p><img src="/2020/08/31/nginx-8-31/keepalived.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<p>定义： <strong>（维基百科）</strong></p>
+<p>​    存活信号通常以一定的时间间隔发出，其在<a href="https://zh.wikipedia.org/wiki/互联网" target="_blank" rel="noopener">互联网</a>上扮演了至关重要的角色。若一端在信号发出后未收到回复，则可判定<a href="https://zh.wikipedia.org/wiki/数据链路" target="_blank" rel="noopener">数据链路</a>离线并将之后的数据包重新路由到其他链路，直到旧链路重新上线为止。存活信号也可表示保留连接状态。若无存活信号，启用<a href="https://zh.wikipedia.org/wiki/网络地址转换" target="_blank" rel="noopener">网络地址转换</a>的<a href="https://zh.wikipedia.org/wiki/路由器" target="_blank" rel="noopener">路由器</a>将于超时后中断连接。</p>
+<p>​    由于存活信息仅用于表示链路状态及保留连接，其应言简意赅且仅仅占用较少的<a href="https://zh.wikipedia.org/wiki/带宽_(计算机)" target="_blank" rel="noopener">带宽</a>。但是，存活信息的格式及用法根据传输协议的不同而有所差异。      </p>
+<p>安装主从脚本，检查进程：ps -ef| grep keepalived， 应该有两个keepalived进程。</p>
+<p>rpm -ivh  ***.rpm    安装软件</p>
+<p> -i 　显示套件的相关信息。 -h或–hash 　套件安装时列出标记。 -v 　显示指令执行过程。</p>
+<p>master不能把vip抢回来，滚动实现，网络抖动情况需要判断原因再切换。</p>
+<h1 id="部署方式-集群高可用"><a href="#部署方式-集群高可用" class="headerlink" title="部署方式-集群高可用"></a><strong>部署方式-集群高可用</strong></h1><p>​    应用系统的在高流量场景下（TPS&gt;=16000)，推荐使用软负载均衡集群进行部署。负载均衡按照网络层次分成多个层级。四层和七层负载均衡是负载均衡建设的两个主要方面。四层负载均衡是基于网络四层IP和端口的负载均衡，七层负载均衡是基于七层网络协议。</p>
+<h1 id="Spring-cloud-gateway"><a href="#Spring-cloud-gateway" class="headerlink" title="Spring cloud gateway"></a><strong>Spring cloud gateway</strong></h1><p>​    This project provides a library for building an API Gateway on top of Spring MVC. Spring Cloud Gateway aims to provide a simple, yet effective way to route to APIs and provide cross cutting concerns to them such as: security, monitoring/metrics, and resiliency.</p>
+<h1 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a><strong>JWT</strong></h1><p>​    JSON WEB Token （JWT) 是一个开放标准（RFC 7519)，它定义了一种紧凑和自包含的方式，用于在各方之间作为json对象安全的传输信息，此信息可以通过数字签名进行验证和信任。</p>
+<p>​    JWT 的原理是，服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。</p>
+<blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;<br>  <span class="hljs-string">"姓名"</span>: <span class="hljs-string">"张三"</span>,<br>  <span class="hljs-string">"角色"</span>: <span class="hljs-string">"管理员"</span>,<br>  <span class="hljs-string">"到期时间"</span>: <span class="hljs-string">"2018年7月1日0点0分"</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>以后，用户与服务端通信的时候，都要发回这个 JSON 对象。服务器完全只靠这个对象认定用户身份。为了防止用户篡改数据，服务器在生成这个对象的时候，会加上签名（详见后文）。</p>
+<p>服务器就不保存任何 session 数据了，也就是说，服务器变成无状态了，从而比较容易实现扩展。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/31/about/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">About</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/06/chuanxiang/">
+                        <span class="hidden-mobile">川香-昭和往事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

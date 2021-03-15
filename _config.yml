@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 韬声依旧
+title: 韬哥的博客
 subtitle: '人间忽晚，山河已秋'
 description: '这是一个来自深圳的少年，乐观自信、积极向上的后浪的博客'
 keywords: 帅
 author: Tower Li
-language: en
+language: zh-CN
 timezone: ''
 
 
@@ -95,7 +95,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: materialized
+theme: fluid
 
 aplayer:
   meting: true
