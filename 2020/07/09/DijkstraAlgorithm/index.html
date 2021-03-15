@@ -1,216 +1,236 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="renderer" content="webkit">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="这是一个来自深圳的少年，乐观自信、积极向上的后浪的博客">
+  
+  <meta name="author" content="Tower Li">
+  <meta name="keywords" content="帅">
+  
+  <title>Dijkstra Algorithm - 韬哥的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-  <title>Dijkstra Algorithm | 韬哥的博客</title>
-
-  <link rel="shortcut icon" href="/images/favicon.png">
-  <link rel="alternate" href="/atom.xml" title="韬哥的博客">
-  <meta name="description" content="1 . 题目成研访客 描述：访客来到成研办公场地，需要找到具体的到访区域。现各个区域间可到达关系已知、耗时已知，请为访客设计一条最省时的路径。例如，访客需访问普惠金融组，可选择多种路径：大厅-&gt;二楼电梯厅-&gt;B区-&gt;A区，大厅-&gt;二楼电梯厅-&gt;E区-&gt;D区-&gt;中部电梯-&gt;A区，大厅-&gt;二楼电梯厅-&gt;E区-&gt;D区-&gt;C区-&amp;gt">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Dijkstra Algorithm">
-<meta property="og:url" content="http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/index.html">
-<meta property="og:site_name" content="韬哥的博客">
-<meta property="og:description" content="1 . 题目成研访客 描述：访客来到成研办公场地，需要找到具体的到访区域。现各个区域间可到达关系已知、耗时已知，请为访客设计一条最省时的路径。例如，访客需访问普惠金融组，可选择多种路径：大厅-&gt;二楼电梯厅-&gt;B区-&gt;A区，大厅-&gt;二楼电梯厅-&gt;E区-&gt;D区-&gt;中部电梯-&gt;A区，大厅-&gt;二楼电梯厅-&gt;E区-&gt;D区-&gt;C区-&amp;gt">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/clipboard.png">
-<meta property="article:published_time" content="2020-07-09T01:30:27.000Z">
-<meta property="article:modified_time" content="2020-08-26T12:19:26.813Z">
-<meta property="article:author" content="Tower Li">
-<meta property="article:tag" content="算法">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/clipboard.png">
-
-  <meta name="format-detection" content="telephone=no,email=no">
-  <meta name="theme-color" content="#9C27B0">
-  <meta name="description" content="这是一个来自深圳的少年，乐观自信、积极向上的后浪的博客">
-  <meta name="keywords" content=",算法">
-
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="韬哥的博客">
-  <meta name="msapplication-starturl" content="http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/">
-  <meta name="msapplication-navbutton-color" content="#9C27B0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="韬哥的博客">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/images/favicon.png">
-
-  
-    <meta property="article:published_time" content="Thu Jul 09 2020 09:30:27 GMT+0800">
-    <meta property="article:modified_time" content="Wed Aug 26 2020 20:19:26 GMT+0800">
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
   
 
   
-    <link rel="canonical" href="http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/">
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
-  
-  
 
-  
-  
-  
 
-  
-<link rel="stylesheet" href="/css/mdui.css">
-<link rel="stylesheet" href="/css/style.css">
+<!-- 主题依赖的图标库，不要自行修改 -->
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"watercoldtoday.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
-<body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-primary-indigo mdui-theme-accent-pink">
-  <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
-  <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
-  <div class="mdui-toolbar mdui-color-theme">
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
-    <a href="/" class="mdui-typo-headline">韬哥的博客</a>
-    <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'Search'}"><i class="mdui-icon material-icons">search</i></a>
-    <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
-  </div>
-</header>
-<div class="mdui-dialog" id="search">
-  
-    <div class="search-form">
-      <input type="search" class="search-form-input" placeholder="Enter the key words">
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>韬声依旧</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div class="search-result" data-resource="/search.xml"></div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dijkstra Algorithm">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-09 09:30" pubdate>
+        2020年7月9日 上午
+      </time>
+    </span>
   
 </div>
-  <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
-  <div class="mdui-grid-tile">
-    <img src="/images/banner.png" style="height: 160px;">
-    <img src="/images/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
-    <div class="mdui-grid-tile-actions">
-      <div class="mdui-grid-tile-text">
-        <div class="mdui-grid-tile-title">Tower Li</div>
-        <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i>人间忽晚，山河已秋</div>
-      </div>
-      
-    </div>
-  </div>
 
-  <div class="mdui-list" mdui-collapse="{accordion: true}">
-    <a href="/" class="mdui-list-item mdui-ripple">
-      <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
-      <div class="mdui-list-item-content">Home</div>
-    </a>
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">inbox</i>
-        <div class="mdui-list-item-content">Archive</div>
-        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
-        
-        <a class="mdui-ripple sidebar_archives-link" href="/archives/2020/08/">August 2020<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/07/">July 2020<span class="mdui-ripple sidebar_archives-count">5</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/06/">June 2020<span class="mdui-ripple sidebar_archives-count">2</span></a>
-        
-      </div>
-    </div>
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">chrome_reader_mode</i>
-        <div class="mdui-list-item-content">Category</div>
-        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
-        
-        
-        
-          <a href="javascript:;" class="mdui-list-item mdui-ripple mdui-p-l-2 mdui-text-color-theme" style="justify-content: center;">No Categories</a>
-        
-      </div>
-    </div>
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
-        <div class="mdui-list-item-content">Tag</div>
-        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
-        
-        <a class="mdui-ripple sidebar_archives-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" rel="tag">人生感悟<span class="mdui-ripple sidebar_archives-count">5</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/%E6%8A%BD%E8%B1%A1%E5%9C%A3%E7%BB%8F/" rel="tag">抽象圣经<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法<span class="mdui-ripple sidebar_archives-count">2</span></a>
-        
-      </div>
-    </div>
-    <a href="/about" class="mdui-list-item mdui-ripple">
-      <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
-      <div class="mdui-list-item-content">About</div>
-    </a>
-  </div>
-
-  <div class="mdui-divider"></div>
-
-  <div class="mdui-list" mdui-collapse="{accordion: true}">
-    
-      <a href="https://watercoldtoday.com/2020/06/19/%E9%9F%AC%E5%A3%B0%E4%BE%9D%E6%97%A7/" class="mdui-list-item mdui-ripple">自我介绍</a>
-    
-      <a href="https://watercoldtoday.com/2020/07/09/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" class="mdui-list-item mdui-ripple">人生感悟</a>
-    
-    <div class="mdui-collapse-item">
-      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <div class="mdui-list-item-content">Links</div>
-        <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
-      </div>
-      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
-        
-          <a href="https://github.com" target="_blank" class="mdui-list-item mdui-ripple mdui-p-l-2 mdui-text-color-theme-accent" style="justify-content: center;">Github</a>
-        
-        
-      </div>
-    </div>
-  </div>
-</aside>
-  <main id="main" class="mdui-m-t-5 fadeIn animated">
+<div class="mt-1">
   
-<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
 
-  <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
-  <article class="mdui-card mdui-m-b-5">
-    <header class="mdui-card-media">
-      <img src="/images/random/material-13.png" style="max-height: 240px;">
-      <div class="mdui-card-media-covered">
-        <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">Dijkstra Algorithm</div>
-          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-07-09 / <i class="iconfont">&#xe601;</i> Tower Li</div>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
         </div>
       </div>
-      <div class="mdui-card-menu">
-        
-        
-          <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
-          <ul class="mdui-menu" id="share_menu">
-            <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=Dijkstra Algorithm&url=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/&pic=http://watercoldtoday.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
-            </li>
-            <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=Dijkstra Algorithm&url=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/&via=Tower Li" target="_blank" class="mdui-ripple">Share to Twitter</a>
-            </li>
-            <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/" target="_blank" class="mdui-ripple">Share to Facebook</a>
-            </li>
-            <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/" target="_blank" class="mdui-ripple">Share to Google+</a>
-            </li>
-            <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/&title=Dijkstra Algorithm" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
-            </li>
-            <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=韬哥的博客&title=Dijkstra Algorithm&summary=这是一个来自深圳的少年，乐观自信、积极向上的后浪的博客&pics=http://watercoldtoday.com/images/favicon.png&url=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/" target="_blank" class="mdui-ripple">Share to QQ</a>
-            </li>
-            <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/&text=Dijkstra Algorithm" target="_blank" class="mdui-ripple">Share to Telegram</a>
-            </li>
-          </ul>
-        
-      </div>
-    </header>
-    <div class="mdui-card-content mdui-typo">
-      <h1 id="1-题目"><a href="#1-题目" class="headerlink" title="1 . 题目"></a>1 . 题目</h1><p>成研访客</p>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Dijkstra Algorithm</h1>
+            
+            <div class="markdown-body">
+              <h1 id="1-题目"><a href="#1-题目" class="headerlink" title="1 . 题目"></a>1 . 题目</h1><p>成研访客</p>
 <p>描述：访客来到成研办公场地，需要找到具体的到访区域。现各个区域间可到达关系已知、耗时已知，请为访客设计一条最省时的路径。例如，访客需访问普惠金融组，可选择多种路径：大厅-&gt;二楼电梯厅-&gt;B区-&gt;A区，大厅-&gt;二楼电梯厅-&gt;E区-&gt;D区-&gt;中部电梯-&gt;A区，大厅-&gt;二楼电梯厅-&gt;E区-&gt;D区-&gt;C区-&gt;A区等，其中，选择大厅-&gt;二楼电梯厅-&gt;B区-&gt;A区最快。</p>
 <p>输入1：节点个数，节点按照字母顺序编号。</p>
 <p>输入2：字符串表示，可达节点间耗时。</p>
@@ -225,12 +245,12 @@
 <p>输出：abed</p>
 <p>解释：从a到d共有4种走法：a-&gt;b-&gt;e-&gt;d，耗时7；a-&gt;b-&gt;h-&gt;g-&gt;c-&gt;d，耗时9；a-&gt;b-&gt;h-&gt;g-&gt;f-&gt;c-&gt;d，耗时11；a-&gt;b-&gt;h-&gt;c-&gt;d，耗时8。可知第一种走法耗时最短，输出abed。</p>
 <h1 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h1><p>（1）分析题目，已知节点个数以及不同节点之间的路径，给出初始节点与目的节点，求初始节点与目的节点之间的最短路径，如果存在则输出路径，不存在则输出NONE。可以很明显的看出来这是一个有权图中求单源最短路径的问题，而且不存在负边权，可以使用dijkstra算法，求出任何一个起点到终点的最短路径。<br>（2）dijkstra算法的基本思想：首先构建一个邻接矩阵，初始化为一个尽量大的数，标识不可达（如MAX=1000000），用来记录节点之间的路径关系，然后根据题目条件设置邻接矩阵，比如a-&gt;b:4，那么邻接矩阵matrix[0][1]=4。<br>（3）构建完邻接矩阵后，再新建一个dis数组、一个pre数组、一个visited数组，分别代表源节点到各个节点的最短路径值，到达最短路径值的前驱节点、节点是否被访问。<br>（4）初始化dis数组为MAX，代表都不可达<br>（5）初始化pre数组为自身节点,pre[i]=i。<br>（6）初始化visited数组为FALSE，代表都未被访问<br>（7）算法开始，从源节点start开始，dis[start]=0。<br>（8）从visited数组中找到未访问的节点{a,b,c,d,e,f,g,h}中dis最小的一个，很明显一开始是start节点遍历，如start=a,从a节点开始，将a节点设置visited数组为已访问节点u，遍历未访问节点v的邻接矩阵，找到一个最短耗时节点,如果通过这个节点中转后路径耗时更短的话，即dis[u] + matrix[u][v] &lt; dis[v]，更新dis[v]，更新其前驱节点为u。<br> (9)继续从未访问节点中遍历，找到未访问节点中路径耗时最小的，作为新的访问初始节点u，并将u设置visited数组为已访问，再遍历未访问节点v的邻接矩阵，找到一个最短耗时，如果通过这个节点中转后路径耗时更短的话，dis[u] + matrix[u][v] &lt; dis[v]，更新dis[v]，更新其前驱节点为u。<br>（10） 直到遍历结束，得到一个计算后的dis数组和pre数组，可以查看源点到其他点的最短路径耗时，如果要查看最短路径，则由pre数组倒推可得到。<br>（11）算法结束</p>
-<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">package com.lihaitao.algorithm;</span><br><span class="line"></span><br><span class="line">import Java.util.Arrays;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line">* Created by Administrator on 2020&#x2F;7&#x2F;8.</span><br><span class="line">*&#x2F;</span><br><span class="line">public class ChengYanVisitor &#123;</span><br><span class="line">   public static int MAXV &#x3D; 1000000;</span><br><span class="line">   public static String getShortestPath(int iNodes, String strInitPath, String strStart, String strEnd)&#123;</span><br><span class="line">       boolean[] visted &#x3D; new boolean[iNodes];</span><br><span class="line">       &#x2F;&#x2F;构建邻接矩阵</span><br><span class="line">       int[][] matrix &#x3D; new int[iNodes][iNodes];</span><br><span class="line">       for (int i &#x3D; 0; i &lt; iNodes; i++ ) &#123;</span><br><span class="line">           Arrays.fill(matrix[i],MAXV);</span><br><span class="line">       &#125;</span><br><span class="line">       &#x2F;&#x2F;最短距离表</span><br><span class="line">       int[] dis &#x3D; new int[iNodes];</span><br><span class="line">       Arrays.fill(dis,MAXV);</span><br><span class="line">       &#x2F;&#x2F;前驱节点</span><br><span class="line">       int[] pre  &#x3D; new int[iNodes];</span><br><span class="line">       &#x2F;&#x2F;邻接矩阵初始化</span><br><span class="line">       String[] path &#x3D; strInitPath.split(&quot;,&quot;);</span><br><span class="line">       for (int i &#x3D; 0 ; i &lt; path.length; i++) &#123;</span><br><span class="line">           matrix[path[i].charAt(0)-&#39;a&#39;][path[i].charAt(3)-&#39;a&#39;] &#x3D; Integer.valueOf(path[i].charAt(5)-&#39;0&#39;);</span><br><span class="line">       &#125;</span><br><span class="line">       for (int i &#x3D; 0 ; i &lt; iNodes; i++) &#123;</span><br><span class="line">           System.out.println(&quot;matrix is &quot; + Arrays.toString(matrix[i]));</span><br><span class="line">       &#125;</span><br><span class="line">       dis[Integer.valueOf(strStart.toCharArray()[0]-&#39;a&#39;)] &#x3D; 0;</span><br><span class="line">       for (int i &#x3D; 0; i &lt; iNodes; i++) &#123;</span><br><span class="line">           &#x2F;&#x2F;初始状态每个点前驱为自身</span><br><span class="line">           pre[i] &#x3D; i;</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(&quot;pre first is &quot; + Arrays.toString(pre));</span><br><span class="line">       for (int i &#x3D; 0; i &lt; iNodes; i++) &#123;</span><br><span class="line">           int u &#x3D; -1, minn &#x3D; MAXV;</span><br><span class="line">           for (int j &#x3D; 0; j &lt; iNodes; j++) &#123;</span><br><span class="line">               if (visted[j] &#x3D;&#x3D; false &amp;&amp; dis[j] &lt; minn) &#123;</span><br><span class="line">                   u &#x3D; j;</span><br><span class="line">                   minn &#x3D; dis[j];</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           if (u &#x3D;&#x3D; -1) return &quot;NONE&quot;;</span><br><span class="line">           visted[u] &#x3D; true;</span><br><span class="line">           for (int v &#x3D; 0; v &lt; iNodes; v++) &#123;</span><br><span class="line">               if (visted[v] &#x3D;&#x3D; false &amp;&amp; dis[u] + matrix[u][v] &lt; dis[v]) &#123;</span><br><span class="line">                   dis[v] &#x3D; dis[u] + matrix[u][v];</span><br><span class="line">                   pre[v] &#x3D; u;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(&quot;pre is &quot; + Arrays.toString(pre));</span><br><span class="line">       System.out.println(&quot;dis is &quot; + Arrays.toString(dis));</span><br><span class="line">       if (dis[Integer.valueOf(strEnd.toCharArray()[0]-&#39;a&#39;)] !&#x3D; MAXV) &#123;</span><br><span class="line">           int i &#x3D; Integer.valueOf(strEnd.toCharArray()[0]-&#39;a&#39;);</span><br><span class="line">           StringBuilder ans &#x3D; new StringBuilder();</span><br><span class="line">           ans.append(String.valueOf((char)(strEnd.toCharArray()[0])));</span><br><span class="line">           while (pre[i] !&#x3D; Integer.valueOf(strStart.toCharArray()[0]-&#39;a&#39;)) &#123;</span><br><span class="line">               ans.append(String.valueOf((char)(pre[i]+&#39;a&#39;)));</span><br><span class="line">               i &#x3D; pre[i];</span><br><span class="line">           &#125;</span><br><span class="line">           ans.append(String.valueOf((char)(pre[i]+&#39;a&#39;)));</span><br><span class="line">           return ans.reverse().toString();</span><br><span class="line">       &#125;</span><br><span class="line">       return &quot;NONE&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">       ChengYanVisitor cy &#x3D; new ChengYanVisitor();</span><br><span class="line">       int iNodes;</span><br><span class="line">       String strInitPath;</span><br><span class="line">       String strStart;</span><br><span class="line">       String strEnd;</span><br><span class="line">       iNodes &#x3D; 8;</span><br><span class="line">       strInitPath &#x3D; &quot;a-&gt;b:4,b-&gt;h:1,b-&gt;e:2,e-&gt;d:1,h-&gt;g:1,h-&gt;c:2,g-&gt;f:2,g-&gt;c:5,f-&gt;c:2,c-&gt;d:1&quot;;</span><br><span class="line">       strStart &#x3D; &quot;a&quot;;</span><br><span class="line">       strEnd &#x3D; &quot;d&quot;;</span><br><span class="line">       System.out.println(&quot;ans is &quot; + cy.getShortestPath(iNodes,strInitPath,strStart,strEnd));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h1><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">package com.lihaitao.algorithm;<br><br>import <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Java</span>.</span></span>util.Arrays;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* Created by Administrator on 2020/7/8.</span><br><span class="hljs-comment">*/</span><br>public <span class="hljs-keyword">class</span> ChengYanVisitor &#123;<br>   public static <span class="hljs-built_in">int</span> MAXV = <span class="hljs-number">1000000</span>;<br>   public static String get<span class="hljs-constructor">ShortestPath(<span class="hljs-params">int</span> <span class="hljs-params">iNodes</span>, String <span class="hljs-params">strInitPath</span>, String <span class="hljs-params">strStart</span>, String <span class="hljs-params">strEnd</span>)</span>&#123;<br>       boolean<span class="hljs-literal">[]</span> visted = <span class="hljs-keyword">new</span> boolean<span class="hljs-literal">[<span class="hljs-identifier">iNodes</span>]</span>;<br>       <span class="hljs-comment">//构建邻接矩阵</span><br>       <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span><span class="hljs-literal">[]</span> matrix = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">iNodes</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">iNodes</span>]</span>;<br>       for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; iNodes; i++ ) &#123;<br>           <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span>fill(matrix<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>,MAXV);<br>       &#125;<br>       <span class="hljs-comment">//最短距离表</span><br>       <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span> dis = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">iNodes</span>]</span>;<br>       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span>fill(dis,MAXV);<br>       <span class="hljs-comment">//前驱节点</span><br>       <span class="hljs-built_in">int</span><span class="hljs-literal">[]</span> pre  = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span><span class="hljs-literal">[<span class="hljs-identifier">iNodes</span>]</span>;<br>       <span class="hljs-comment">//邻接矩阵初始化</span><br>       String<span class="hljs-literal">[]</span> path = strInitPath.split(<span class="hljs-string">","</span>);<br>       for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span> ; i &lt; path.length; i++) &#123;<br>           matrix<span class="hljs-literal">[<span class="hljs-identifier">path</span>[<span class="hljs-identifier">i</span>]</span>.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(0)</span>-<span class="hljs-character">'a'</span>]<span class="hljs-literal">[<span class="hljs-identifier">path</span>[<span class="hljs-identifier">i</span>]</span>.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(3)</span>-<span class="hljs-character">'a'</span>] = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Integer</span>.</span></span>value<span class="hljs-constructor">Of(<span class="hljs-params">path</span>[<span class="hljs-params">i</span>].<span class="hljs-params">charAt</span>(5)</span>-<span class="hljs-character">'0'</span>);<br>       &#125;<br>       for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span> ; i &lt; iNodes; i++) &#123;<br>           <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"matrix is "</span> + <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">String(<span class="hljs-params">matrix</span>[<span class="hljs-params">i</span>])</span>);<br>       &#125;<br>       dis<span class="hljs-literal">[I<span class="hljs-identifier">nteger</span>.<span class="hljs-identifier">valueOf</span>(<span class="hljs-identifier">strStart</span>.<span class="hljs-identifier">toCharArray</span>()[<span class="hljs-number">0</span>]</span>-<span class="hljs-character">'a'</span>)] = <span class="hljs-number">0</span>;<br>       for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; iNodes; i++) &#123;<br>           <span class="hljs-comment">//初始状态每个点前驱为自身</span><br>           pre<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> = i;<br>       &#125;<br>       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"pre first is "</span> + <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">String(<span class="hljs-params">pre</span>)</span>);<br>       for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; iNodes; i++) &#123;<br>           <span class="hljs-built_in">int</span> u = -<span class="hljs-number">1</span>, minn = MAXV;<br>           for (<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt; iNodes; j++) &#123;<br>               <span class="hljs-keyword">if</span> (visted<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span><span class="hljs-operator"> == </span><span class="hljs-literal">false</span><span class="hljs-operator"> &amp;&amp; </span>dis<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span> &lt; minn) &#123;<br>                   u = j;<br>                   minn = dis<span class="hljs-literal">[<span class="hljs-identifier">j</span>]</span>;<br>               &#125;<br>           &#125;<br>           <span class="hljs-keyword">if</span> (u<span class="hljs-operator"> == </span>-<span class="hljs-number">1</span>) return <span class="hljs-string">"NONE"</span>;<br>           visted<span class="hljs-literal">[<span class="hljs-identifier">u</span>]</span> = <span class="hljs-literal">true</span>;<br>           for (<span class="hljs-built_in">int</span> v = <span class="hljs-number">0</span>; v &lt; iNodes; v++) &#123;<br>               <span class="hljs-keyword">if</span> (visted<span class="hljs-literal">[<span class="hljs-identifier">v</span>]</span><span class="hljs-operator"> == </span><span class="hljs-literal">false</span><span class="hljs-operator"> &amp;&amp; </span>dis<span class="hljs-literal">[<span class="hljs-identifier">u</span>]</span> + matrix<span class="hljs-literal">[<span class="hljs-identifier">u</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">v</span>]</span> &lt; dis<span class="hljs-literal">[<span class="hljs-identifier">v</span>]</span>) &#123;<br>                   dis<span class="hljs-literal">[<span class="hljs-identifier">v</span>]</span> = dis<span class="hljs-literal">[<span class="hljs-identifier">u</span>]</span> + matrix<span class="hljs-literal">[<span class="hljs-identifier">u</span>]</span><span class="hljs-literal">[<span class="hljs-identifier">v</span>]</span>;<br>                   pre<span class="hljs-literal">[<span class="hljs-identifier">v</span>]</span> = u;<br>               &#125;<br>           &#125;<br>       &#125;<br>       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"pre is "</span> + <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">String(<span class="hljs-params">pre</span>)</span>);<br>       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"dis is "</span> + <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">String(<span class="hljs-params">dis</span>)</span>);<br>       <span class="hljs-keyword">if</span> (dis<span class="hljs-literal">[I<span class="hljs-identifier">nteger</span>.<span class="hljs-identifier">valueOf</span>(<span class="hljs-identifier">strEnd</span>.<span class="hljs-identifier">toCharArray</span>()[<span class="hljs-number">0</span>]</span>-<span class="hljs-character">'a'</span>)] != MAXV) &#123;<br>           <span class="hljs-built_in">int</span> i = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Integer</span>.</span></span>value<span class="hljs-constructor">Of(<span class="hljs-params">strEnd</span>.<span class="hljs-params">toCharArray</span>()</span><span class="hljs-literal">[<span class="hljs-number">0</span>]</span>-<span class="hljs-character">'a'</span>);<br>           StringBuilder ans = <span class="hljs-keyword">new</span> <span class="hljs-constructor">StringBuilder()</span>;<br>           ans.append(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">String</span>.</span></span>value<span class="hljs-constructor">Of((<span class="hljs-params">char</span>)</span>(strEnd.<span class="hljs-keyword">to</span><span class="hljs-constructor">CharArray()</span><span class="hljs-literal">[<span class="hljs-number">0</span>]</span>)));<br>           <span class="hljs-keyword">while</span> (pre<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> != <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Integer</span>.</span></span>value<span class="hljs-constructor">Of(<span class="hljs-params">strStart</span>.<span class="hljs-params">toCharArray</span>()</span><span class="hljs-literal">[<span class="hljs-number">0</span>]</span>-<span class="hljs-character">'a'</span>)) &#123;<br>               ans.append(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">String</span>.</span></span>value<span class="hljs-constructor">Of((<span class="hljs-params">char</span>)</span>(pre<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>+<span class="hljs-character">'a'</span>)));<br>               i = pre<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>;<br>           &#125;<br>           ans.append(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">String</span>.</span></span>value<span class="hljs-constructor">Of((<span class="hljs-params">char</span>)</span>(pre<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>+<span class="hljs-character">'a'</span>)));<br>           return ans.reverse<span class="hljs-literal">()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>       &#125;<br>       return <span class="hljs-string">"NONE"</span>;<br>   &#125;<br><br><br>   public static void main(String<span class="hljs-literal">[]</span> args) &#123;<br>       ChengYanVisitor cy = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ChengYanVisitor()</span>;<br>       <span class="hljs-built_in">int</span> iNodes;<br>       String strInitPath;<br>       String strStart;<br>       String strEnd;<br>       iNodes = <span class="hljs-number">8</span>;<br>       strInitPath = <span class="hljs-string">"a-&gt;b:4,b-&gt;h:1,b-&gt;e:2,e-&gt;d:1,h-&gt;g:1,h-&gt;c:2,g-&gt;f:2,g-&gt;c:5,f-&gt;c:2,c-&gt;d:1"</span>;<br>       strStart = <span class="hljs-string">"a"</span>;<br>       strEnd = <span class="hljs-string">"d"</span>;<br>       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"ans is "</span> + cy.get<span class="hljs-constructor">ShortestPath(<span class="hljs-params">iNodes</span>,<span class="hljs-params">strInitPath</span>,<span class="hljs-params">strStart</span>,<span class="hljs-params">strEnd</span>)</span>);<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <h1 id="4-思路"><a href="#4-思路" class="headerlink" title="4. 思路"></a>4. 思路</h1><p>可以参考此图理解</p>
-<p><img src="/2020/07/09/DijkstraAlgorithm/clipboard.png" alt="avatar"></p>
+<p><img src="/2020/07/09/DijkstraAlgorithm/clipboard.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <table>
 <thead>
 <tr>
@@ -267,83 +287,241 @@
 </tbody></table>
 <p> 请填充此表，就可以得出答案~</p>
 
-      <blockquote class="mdui-m-t-5">
-        
-        <strong>PermaLink: </strong><a href="http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/">http://watercoldtoday.com/2020/07/09/DijkstraAlgorithm/</a>
-      </blockquote>
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/10/%E6%98%A5%E9%A3%8E%E8%B7%AF%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">春风路的那些事</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/09/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/">
+                        <span class="hidden-mobile">人生感悟</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
-    <footer class="mdui-card-actions">
-      
-      
-        <a class="mdui-ripple article_tags-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
-      
-    </footer>
-	
     
-  </article>
-  
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-  <script>$("#main article .mdui-card-content img.fancybox").on("click",function(e){$.fancybox.open({src:$(this).attr("src")});});</script>
-
-
-  <nav id="paginator">
+      </div>
     
-      <a rel="prev" class="extend prev" href="/2020/07/10/%E6%98%A5%E9%A3%8E%E8%B7%AF%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">
-        <button aria-label="prev" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_back</i></button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prev
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
-    <div class="spacer"></div>
+
     
-      <a rel="next" class="extend next" href="/2020/07/09/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/">
-        Next&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
-      </a>
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
     
-  </nav>
 
-
-
-
+    
   </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
-<footer id="footer" class="mdui-m-t-5 mdui-p-y-3 mdui-color-theme">
-  <div class="mdui-p-y-0 mdui-text-center">
+  <div class="statistics">
     
     
+
     
-    
-      <a href="https://weibo.com/wotaoge" target="_blank"><i class="mdui-p-a-1 mdui-icon iconfont mdui-text-color-theme-a100">&#xec7e;</i></a>
-    
-    
-    
-    
-    
-    
-    
-    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
     
   </div>
-  <div class="mdui-p-y-1 mdui-text-center">
-    Copyright &copy; 2019 - 2020 Tower Li<br>
-    Powered by <a href="https://hexo.io/" target="_blank" class="mdui-text-color-theme-accent">Hexo</a>
-    
-  </div>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <div style ="text-align: center;">
-  <span id="busuanzi_container_site_uv" >本站总访问量<span id="busuanzi_value_site_uv" style="font-weight: bold"></span>次</span>
-  </div>
+
+
+  
+
+  
 </footer>
 
 
-  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">arrow_upward</i></button>
+  <!-- SCRIPTS -->
   
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
   
-<script src="/js/mdui.js"></script>
-<script src="/js/script.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>
